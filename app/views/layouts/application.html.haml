@@ -9,5 +9,32 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = action_cable_meta_tag
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+    %link{crossorigin: "anonymous", href: "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity: "sha384-Vkoo8x4CGsO3+Hhxv8TQ5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", rel: "stylesheet"}
+    %script{crossorigin: "anonymous", integrity: "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", src: "https://code.jquery.com/jquery-3.2.1.slim.min.js"}
+    %meta{content: "width=devise-width, initial-scale=1, maximum-scale=1", name: "viewport"}/
+    %nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
+      %a.navbar-brand{href: "/", style: "padding: 10px"} Harman
+      %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", type: "button"}
+        %span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse.justify-content-end
+        - if user_signed_in?
+          %div{style: "padding: 10px;"}
+            -# = link_to "New Post", new_post_path, class: "btn btn-primary", :method => "get"
+          %div{style: "padding: 10px;"}
+            = link_to 'Log Out', destroy_user_session_path, class: "btn btn-outline-danger", method: :delete
+        - else
+          %div{style: "padding: 10px"}
+            = link_to 'Login', new_user_session_path, class: "btn btn-outline-primary", :method => 'post'
+          %div{style: "padding: 10px"}
+            = link_to 'Join', new_user_registration_path, class: "btn btn-outline-success"
   %body
-    = yield
+    - if user_signed_in?
+      / <div style="float: right; padding-top: 10px; padding-right: 10px">
+      / </div>
+    %p.notice{style: "text-align: center;"}
+      = notice
+    %p.alert{style: "text-align: center;"}
+      = alert
+    .container-fluid{style: "text-align: center;"}
+      = yield
