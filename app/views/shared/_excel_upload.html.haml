@@ -1,0 +1,11 @@
+= form_for @excel_upload, url: import_path do |f|
+  .row
+    .col-sm-12
+      .form-group
+        = f.label :body
+        = f.text_area :body, class: "form-control"
+      .form-group
+        = f.label :excel_file
+        = f.file_field :excel_file, class: "form-control"
+  .actions
+    = f.submit 'Save'

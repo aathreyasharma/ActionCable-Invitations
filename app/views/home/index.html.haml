@@ -1,7 +1,10 @@
--# %div{style: "margin: 40px"}
--#   = form_for @message, remote: true do |f|
--#     .form-group
--#       = f.text_field :content, class: "form-control"
--#       = f.submit 'Add', class: 'btn btn-primary'
-
--#   %div#msg
+.row
+  .col-sm-12
+    = form_for @excel_upload, url: import_home_index_path do |f|
+      .row
+        .col-sm-4
+        .col-sm-4
+          .form-group
+            = f.hidden_field :name, value: nil
+            = f.file_field :excel_file, accept: 'text/csv',  class: "form-control"
+            = f.submit 'Import', class: 'btn btn-primary mt-4'
