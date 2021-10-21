@@ -8,7 +8,8 @@ class ProcessCsvUploadWorker
       csv_data = CSV.parse(import_file.excel_file.download, headers: true)
       CSV.parse(import_file.excel_file.download, headers: true) do |row|
           hash = row.to_h
-          Sidekiq.logger.error "logger.info : #{hash['emails']}"
+          user = User.new(email: hash["emails"], managed_by_id: current_user_id)
+          user.invite!
       end
     rescue Exception => e
       Rails.logger.info e

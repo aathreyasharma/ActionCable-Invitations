@@ -74,6 +74,17 @@ Rails.application.configure do
   config.action_cable.mount_path = 'websocketier'
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    authentication: "plain",
+    user_name: ENV['EMAIL'], # you can use ordinary gmail username here
+    password: ENV['PASSWORD']   # you can use your gmail password here, but don't push the changes
+  }
+
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
