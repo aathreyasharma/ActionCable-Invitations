@@ -1,6 +1,6 @@
 .row
   .col-sm-12
-    = form_for @excel_upload, url: import_home_index_path do |f|
+    = form_for @excel_upload, url: import_home_index_path, remote: true do |f|
       .row
         .col-sm-4
         .col-sm-4
@@ -8,3 +8,34 @@
             = f.hidden_field :name, value: nil
             = f.file_field :excel_file, accept: 'text/csv',  class: "form-control"
             = f.submit 'Import', class: 'btn btn-primary mt-4'
+
+= render 'shared/notification_modal', unread_notifications: @unread_notifications
+
+:javascript
+  $(document).ready(function() {
+
+    $('#modal-button').click(function(){
+      $('#notification-modal').modal('show');
+    })
+
+    $('.modal-close').click(function(){
+      $('#notification-modal').modal('hide');
+      $.ajax({
+        type: 'GET',
+        url: '/home/clear_notifications',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+          $('#notification-list').html('')
+          $('#notification-count').html(0)
+        }
+      });
+    })
+
+    $('#new_file_upload').on('ajax:success', function(e, data, status, xhr){
+      $('#file_upload_excel_file').val(null)
+      alert('File uploaded');
+    }).on('ajax:error',function(e, xhr, status, error){
+      alert('Failed to upload');
+    });
+  })

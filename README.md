@@ -18,6 +18,8 @@ Things you may want to cover:
 * How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
+  Start redis server: redis-server
+  Start sidekiq worker: bundle exec sidekiq
 
 * Deployment instructions
 

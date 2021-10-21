@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :home, only: [:index] do
     collection do
       post :import
+      get :my_files
+      get :clear_notifications
     end
   end
   root to: "home#index"

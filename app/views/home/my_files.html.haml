@@ -1,0 +1,10 @@
+%div
+  .row
+    = link_to 'Back', home_index_path, class: 'float-left'
+  .row
+    .col-md-4
+      %ul.list_group
+        - @files.each do |file|
+          %li
+            %p
+              = file.file_name

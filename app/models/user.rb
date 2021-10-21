@@ -7,4 +7,5 @@ class User < ApplicationRecord
   # belongs_to :managed_by, class_name: 'User', optional: true
   has_many :invitations, :class_name => self.to_s, :as => :invited_by
   has_many :file_uploads, foreign_key: :created_by_id
+  has_many :notifications
 end
