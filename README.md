@@ -5,9 +5,9 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 2.6.3
 
-* System dependencies
+* System dependencies:
 
 * Configuration
 
@@ -19,8 +19,8 @@ Things you may want to cover:
 
 * Services (job queues, cache servers, search engines, etc.)
   Start redis server: redis-server
-  Start sidekiq worker: bundle exec sidekiq
-
+  Start sidekiq worker: bundle exec sidekiq -C config/sidekiq.yml
+  Start Rails Server: bundle exec rails s
 * Deployment instructions
 
 * ...

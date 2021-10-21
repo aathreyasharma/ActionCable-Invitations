@@ -12,6 +12,8 @@ class ProcessCsvUploadJob
         user = User.find_or_initialize_by(email: hash["emails"])
         unless user.persisted?
           user.managed_by_id = current_user_id
+          user.invited_by_id = current_user_id
+          user.invited_by_class = 'User'
           user.invite!
           Rails.logger.info "User Invited: #{user.email}"
         else
